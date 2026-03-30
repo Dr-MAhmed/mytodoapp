@@ -5,19 +5,6 @@ import App from "./App.tsx";
 import { AppWrapper } from "./components/common/PageMeta.tsx";
 import { ThemeProvider } from "next-themes";
 
-// Register Service Worker for PWA
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/sw.js")
-      .then(registration => {
-        console.log("SW registered");
-      })
-      .catch(err => {
-        console.log("SW registration failed", err);
-      });
-  });
-}
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

@@ -1,21 +1,41 @@
 {
-  "name": "Todify",
+  "name": "Todify - Modern Todo List",
   "short_name": "Todify",
-  "description": "A modern, minimalist PWA todo list application.",
+  "description": "A modern, minimalist PWA todo list application with offline support, drag-and-drop, and priority management.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
+  "orientation": "portrait",
+  "scope": "/",
+  "categories": ["productivity", "utilities"],
+  "lang": "en-US",
   "icons": [
     {
       "src": "/favicon.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/favicon.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Add New Task",
+      "short_name": "New Task",
+      "description": "Quickly add a new todo item",
+      "url": "/?action=add",
+      "icons": [
+        {
+          "src": "/favicon.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }
