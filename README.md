@@ -1,18 +1,33 @@
-# MyTodoApp
+# Todify - Modern Todo List PWA
 
-A modern, feature-rich Todo List PWA built with React, TypeScript, and Supabase. Supports offline access, drag-and-drop task management, bulk actions, and smooth animations.
+A modern, feature-rich Todo List Progressive Web App built with React, TypeScript, and Supabase. Supports offline access, drag-and-drop task management, bulk actions, and smooth animations.
 
-## Live Features
+## 🚀 Install as App
 
-- Add, edit, and delete tasks
-- Mark tasks as complete
-- Urgency/priority styling per task
-- Drag-and-drop task reordering
-- Multi-select with bulk actions
-- Filter tasks (All / Active / Completed)
-- Offline support via PWA service worker
-- Smooth animations powered by Framer Motion
-- Responsive design for all screen sizes
+**Todify is now installable on all devices!**
+
+- 📱 **Android**: Tap the "Install App" button in the header
+- 🍎 **iPhone/iPad**: Tap Share → Add to Home Screen
+- 💻 **Windows PC**: Tap the "Install App" button - creates a desktop app
+- 🖥️ **Mac/Linux**: Tap the "Install App" button - adds to applications
+
+Once installed, the app works completely offline with all your data stored locally!
+
+[📖 PWA Setup Guide →](PWA_SETUP.md)
+
+## ✨ Live Features
+
+- ✅ Add, edit, and delete tasks
+- ✅ Mark tasks as complete
+- ✅ Urgency/priority styling per task
+- ✅ Drag-and-drop task reordering
+- ✅ Multi-select with bulk actions
+- ✅ Filter tasks (All / Active / Completed)
+- ✅ **🔌 Offline support via PWA service worker**
+- ✅ Smooth animations powered by Framer Motion
+- ✅ **📲 Install on mobile, tablet, or desktop**
+- ✅ Responsive design for all screen sizes
+- ✅ Dark/Light theme support
 
 ## Tech Stack
 
