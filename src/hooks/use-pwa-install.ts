@@ -51,7 +51,12 @@ export const usePwaInstall = () => {
         alert(
           'To install this app on iOS:\n\n1. Tap Share button\n2. Tap Add to Home Screen\n3. Tap Add'
         );
+      } else {
+        alert(
+          'Install prompt not available yet.\n\nMake sure you are using HTTPS (or localhost), the app is not already installed, and then use your browser menu:\n- Chrome: Install app / Add to desktop\n- Edge: Apps > Install this site as an app\n- Firefox: Add to homescreen (mobile).'
+        );
       }
+      console.warn('PWA install trigger is unavailable. Ensure user engagement criteria are met.');
       return;
     }
 
