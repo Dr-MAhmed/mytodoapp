@@ -98,7 +98,6 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background transition-colors duration-500 pb-20">
-      {/* <OfflineAvailabilityBanner /> */}
       {/* Header / App Bar */}
       <header className="sticky top-0 z-20 w-full border-b bg-background/80 backdrop-blur-md">
         <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -128,20 +127,6 @@ const Dashboard: React.FC = () => {
       </header>
 
       <main className="max-w-3xl mx-auto px-4 pt-10 pb-20 space-y-8">
-        {/* Offline Feature Card */}
-        <section className="animate-in fade-in slide-in-from-top-4 duration-500">
-          {/* <OfflineFeatureCard 
-            isOnline={isOnline}
-            isInstalled={isInstalled}
-            onDownloadClick={() => {
-              const downloadBtn = document.querySelector('[title="Download this app to use offline anytime"]') as HTMLButtonElement;
-              if (downloadBtn) {
-                downloadBtn.click();
-              }
-            }}
-          /> */}
-        </section>
-
         {/* Task Input Area */}
         <section className="animate-in fade-in slide-in-from-top-4 duration-500">
           <TodoInput onAdd={addTodo} />

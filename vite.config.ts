@@ -19,8 +19,10 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: "autoUpdate",
+      manifest: false,
       devOptions: {
-        enabled: false,
+        enabled: true,
+        type: "module",
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2,ttf,eot}"],
@@ -40,7 +42,7 @@ export default defineConfig({
         skipWaiting: true,
         clientsClaim: true,
       },
-      includeAssets: ["favicon.png"],
+      includeAssets: ["favicon.png", "icon.svg"],
     }),
   ],
   resolve: {
