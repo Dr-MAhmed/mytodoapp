@@ -6,13 +6,15 @@ import { TodoFilters } from '@/components/todo/TodoFilters';
 import { TodoEditDialog } from '@/components/todo/TodoEditDialog';
 import { BulkActions } from '@/components/todo/BulkActions';
 import { Button } from '@/components/ui/button';
-import { Moon, Sun, CheckCircle2} from 'lucide-react';
+import { Moon, Sun, CheckCircle2, LogOut } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from 'next-themes';
 import { format } from 'date-fns';
 import type { Todo, TodoFilter, TodoSort } from '@/types/todo';
 import { PwaInstallButton } from '@/components/PwaInstallButton';
 // import { motion, AnimatePresence } from 'framer-motion';
 const Dashboard: React.FC = () => {
+  const { user, signOut } = useAuth();
   const {
     todos,
     addTodo,
@@ -127,6 +129,16 @@ const Dashboard: React.FC = () => {
               <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               <span className="sr-only">Toggle theme</span>
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={signOut}
+              title={`Sign out (${user?.email})`}
+              className="rounded-full h-10 w-10 hover:bg-destructive/10 hover:text-destructive transition-all active:scale-95"
+            >
+              <LogOut className="h-4 w-4" />
+              <span className="sr-only">Sign out</span>
             </Button>
           </div>
         </div>
