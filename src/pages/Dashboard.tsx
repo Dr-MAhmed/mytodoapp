@@ -5,23 +5,20 @@ import { TodoList } from '@/components/todo/TodoList';
 import { TodoFilters } from '@/components/todo/TodoFilters';
 import { TodoEditDialog } from '@/components/todo/TodoEditDialog';
 import { BulkActions } from '@/components/todo/BulkActions';
-import { PwaInstallButton } from '@/components/PwaInstallButton';
-import { OfflineAvailabilityBanner } from '@/components/OfflineAvailabilityBanner';
-import { OfflineFeatureCard } from '@/components/OfflineFeatureCard';
 import { Button } from '@/components/ui/button';
 import { Moon, Sun, CheckCircle2, LayoutGrid, List } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { format } from 'date-fns';
 import type { Todo, TodoFilter, TodoSort } from '@/types/todo';
+import { PwaInstallButton } from '@/components/PwaInstallButton';
 import { motion, AnimatePresence } from 'framer-motion';
-
 const Dashboard: React.FC = () => {
-  const { 
-    todos, 
-    addTodo, 
-    updateTodo, 
-    deleteTodo, 
-    toggleTodo, 
+  const {
+    todos,
+    addTodo,
+    updateTodo,
+    deleteTodo,
+    toggleTodo,
     reorderTodos,
     bulkDelete,
     bulkToggle
@@ -84,7 +81,7 @@ const Dashboard: React.FC = () => {
   }), [todos]);
 
   const handleSelect = (id: string) => {
-    setSelectedIds(prev => 
+    setSelectedIds(prev =>
       prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
     );
   };
@@ -101,7 +98,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background transition-colors duration-500 pb-20">
-      <OfflineAvailabilityBanner />
+      {/* <OfflineAvailabilityBanner /> */}
       {/* Header / App Bar */}
       <header className="sticky top-0 z-20 w-full border-b bg-background/80 backdrop-blur-md">
         <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -114,7 +111,6 @@ const Dashboard: React.FC = () => {
               <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{format(new Date(), 'EEEE, MMM d')}</p>
             </div>
           </div>
-
           <div className="flex items-center gap-2">
             <PwaInstallButton />
             <Button
@@ -134,7 +130,7 @@ const Dashboard: React.FC = () => {
       <main className="max-w-3xl mx-auto px-4 pt-10 pb-20 space-y-8">
         {/* Offline Feature Card */}
         <section className="animate-in fade-in slide-in-from-top-4 duration-500">
-          <OfflineFeatureCard 
+          {/* <OfflineFeatureCard 
             isOnline={isOnline}
             isInstalled={isInstalled}
             onDownloadClick={() => {
@@ -143,7 +139,7 @@ const Dashboard: React.FC = () => {
                 downloadBtn.click();
               }
             }}
-          />
+          /> */}
         </section>
 
         {/* Task Input Area */}
@@ -153,10 +149,10 @@ const Dashboard: React.FC = () => {
 
         {/* Filters & Sorting */}
         <section className="animate-in fade-in slide-in-from-bottom-2 duration-500 delay-150">
-          <TodoFilters 
-            filter={filter} 
-            setFilter={setFilter} 
-            sort={sort} 
+          <TodoFilters
+            filter={filter}
+            setFilter={setFilter}
+            sort={sort}
             setSort={setSort}
             counts={counts}
           />
@@ -164,7 +160,7 @@ const Dashboard: React.FC = () => {
 
         {/* Task List */}
         <section className="pb-10 min-h-[400px]">
-          <TodoList 
+          <TodoList
             todos={filteredTodos}
             onToggle={toggleTodo}
             onDelete={deleteTodo}
@@ -177,7 +173,7 @@ const Dashboard: React.FC = () => {
       </main>
 
       {/* Bulk Actions overlay */}
-      <BulkActions 
+      <BulkActions
         selectedCount={selectedIds.length}
         onClearSelection={() => setSelectedIds([])}
         onBulkDelete={handleBulkDelete}
@@ -186,7 +182,7 @@ const Dashboard: React.FC = () => {
       />
 
       {/* Edit Dialog */}
-      <TodoEditDialog 
+      <TodoEditDialog
         todo={editingTodo}
         isOpen={!!editingTodo}
         onClose={() => setEditingTodo(null)}

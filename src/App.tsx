@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import IntersectObserver from '@/components/common/IntersectObserver';
 import { Toaster } from '@/components/ui/sonner';
+import { usePwaInstall } from '@/hooks/use-pwa-install';
 
 import routes from './routes';
 
@@ -9,6 +10,9 @@ import routes from './routes';
 // import { RouteGuard } from '@/components/common/RouteGuard';
 
 const App: React.FC = () => {
+  // Initialize PWA install hook for automatic prompts
+  usePwaInstall();
+
   return (
     <Router>
       {/*<AuthProvider>*/}
