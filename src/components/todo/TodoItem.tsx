@@ -1,14 +1,13 @@
 import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { GripVertical, Edit2, Trash2, Calendar, Tag, MoreVertical } from 'lucide-react';
+import { GripVertical, Edit2, Trash2, Calendar, Tag } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { format, isToday, isPast, startOfDay } from 'date-fns';
+import { format, isToday, isPast } from 'date-fns';
 import type { Todo, Priority } from '@/types/todo';
-import { motion } from 'framer-motion';
 
 interface TodoItemProps {
   todo: Todo;
@@ -25,10 +24,10 @@ const priorityConfig: Record<Priority, { color: string; label: string }> = {
   high: { color: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400', label: 'High' },
 };
 
-export const TodoItem: React.FC<TodoItemProps> = ({ 
-  todo, 
-  onToggle, 
-  onDelete, 
+export const TodoItem: React.FC<TodoItemProps> = ({
+  todo,
+  onToggle,
+  onDelete,
   onEdit,
   isSelected,
   onSelect
@@ -52,8 +51,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   const getUrgencyColor = (dueDate: string | null | undefined) => {
     if (!dueDate) return 'text-muted-foreground';
     const date = new Date(dueDate);
-    const today = startOfDay(new Date());
-    
+
     if (isPast(date) && !isToday(date)) return 'text-destructive font-semibold';
     if (isToday(date)) return 'text-amber-600 dark:text-amber-500 font-semibold';
     return 'text-muted-foreground';
@@ -107,17 +105,17 @@ export const TodoItem: React.FC<TodoItemProps> = ({
               {todo.title}
             </h3>
             <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 className="h-8 w-8 text-muted-foreground hover:text-foreground"
                 onClick={() => onEdit(todo)}
               >
                 <Edit2 className="h-4 w-4" />
               </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 className="h-8 w-8 text-destructive/80 hover:text-destructive hover:bg-destructive/10"
                 onClick={() => onDelete(todo.id)}
               >

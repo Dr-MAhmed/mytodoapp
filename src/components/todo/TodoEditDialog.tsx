@@ -7,7 +7,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from '@/components/ui/dialog';
 import {
   Form,
@@ -26,7 +25,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { CalendarIcon, Trash2, Save, X } from 'lucide-react';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
-import type { Todo, Priority } from '@/types/todo';
+import type { Todo } from '@/types/todo';
 
 const formSchema = z.object({
   title: z.string().min(1, 'Title is required').max(200, 'Title is too long'),

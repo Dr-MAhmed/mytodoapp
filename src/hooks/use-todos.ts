@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import type { Todo, Priority } from '@/types/todo';
+import type { Todo } from '@/types/todo';
 import { toast } from 'sonner';
 
 const STORAGE_KEY = 'todify_tasks';
