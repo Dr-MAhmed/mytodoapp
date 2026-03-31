@@ -6,12 +6,12 @@ import { TodoFilters } from '@/components/todo/TodoFilters';
 import { TodoEditDialog } from '@/components/todo/TodoEditDialog';
 import { BulkActions } from '@/components/todo/BulkActions';
 import { Button } from '@/components/ui/button';
-import { Moon, Sun, CheckCircle2, LayoutGrid, List } from 'lucide-react';
+import { Moon, Sun, CheckCircle2} from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { format } from 'date-fns';
 import type { Todo, TodoFilter, TodoSort } from '@/types/todo';
 import { PwaInstallButton } from '@/components/PwaInstallButton';
-import { motion, AnimatePresence } from 'framer-motion';
+// import { motion, AnimatePresence } from 'framer-motion';
 const Dashboard: React.FC = () => {
   const {
     todos,
@@ -30,9 +30,9 @@ const Dashboard: React.FC = () => {
   const [editingTodo, setEditingTodo] = useState<Todo | null>(null);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const [isInstalled, setIsInstalled] = useState(
-    window.matchMedia('(display-mode: standalone)').matches
-  );
+  // const [isInstalled, setIsInstalled] = useState(
+  //   window.matchMedia('(display-mode: standalone)').matches
+  // );
 
   // Listen for online/offline events
   useEffect(() => {
@@ -111,6 +111,12 @@ const Dashboard: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            {!isOnline && (
+              <span className="text-xs font-medium text-destructive flex items-center gap-1 bg-destructive/10 px-2 py-1 rounded-full">
+                <span className="w-2 h-2 rounded-full bg-destructive animate-pulse" />
+                Offline
+              </span>
+            )}
             <PwaInstallButton />
             <Button
               variant="ghost"
