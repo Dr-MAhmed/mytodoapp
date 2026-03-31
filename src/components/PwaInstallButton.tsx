@@ -13,7 +13,12 @@ import {
 } from '@/components/ui/alert-dialog';
 
 export const PwaInstallButton: React.FC = () => {
-  const { isInstallable, isInstalled, isIos, handleInstall } = usePwaInstall();
+  const { isInstallable, isInstalled, isIos, handleInstall, debugInfo } = usePwaInstall();
+
+  // Debug logging
+  React.useEffect(() => {
+    console.log('📱 PWA Install Button Debug:', debugInfo);
+  }, [debugInfo]);
   const [isOnline, setIsOnline] = React.useState(navigator.onLine);
 
   React.useEffect(() => {
@@ -54,9 +59,14 @@ export const PwaInstallButton: React.FC = () => {
     );
   }
 
-  // Don't show button if not installable or iOS
-  if (!isInstallable && !isIos) {
-    return null;
+  // Don't show button if not installable or iOS (but show for testing in dev)
+  const isDev = import.meta.env.DEV;
+  if (!isInstallable && !isIos && !isDev) {
+    return (
+      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+        <span>💡 Install manually via browser menu</span>
+      </div>
+    );
   }
 
   return (
@@ -76,7 +86,11 @@ export const PwaInstallButton: React.FC = () => {
         <AlertDialogTitle className="text-lg font-bold">
           📱 Download Todify for Offline Access
         </AlertDialogTitle>
-        <AlertDialogDescription className="space-y-4">
+        <AlertDialogDescription>
+          Download this app to use it anytime, anywhere - even with no internet connection.
+        </AlertDialogDescription>
+
+        <div className="space-y-4 mt-4">
           <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
             <p className="font-semibold text-blue-900 dark:text-blue-100 mb-2">
               ✨ Works Without Internet!
@@ -125,7 +139,7 @@ export const PwaInstallButton: React.FC = () => {
               </div>
             </div>
           )}
-        </AlertDialogDescription>
+        </div>
 
         <div className="flex gap-3 pt-4">
           <AlertDialogCancel className="flex-1">Not Now</AlertDialogCancel>

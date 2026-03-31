@@ -10,6 +10,7 @@ export const usePwaInstall = () => {
   const [isInstallable, setIsInstallable] = useState(false);
   const [isInstalled, setIsInstalled] = useState(false);
   const [isIos, setIsIos] = useState(false);
+  const [serviceWorkerRegistered, setServiceWorkerRegistered] = useState(false);
 
   useEffect(() => {
     // Check if PWA is already installed
@@ -21,8 +22,29 @@ export const usePwaInstall = () => {
     const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent);
     setIsIos(isIOSDevice);
 
+    // Check service worker status
+    const checkServiceWorker = async () => {
+      try {
+        const registration = await navigator.serviceWorker.getRegistration();
+        setServiceWorkerRegistered(!!registration);
+      } catch (error) {
+        console.warn('Service worker check failed:', error);
+      }
+    };
+
+    checkServiceWorker();
+
+    // Debug logging
+    console.log('🔍 PWA Status Check:', {
+      isIOS: isIOSDevice,
+      isStandalone: window.matchMedia('(display-mode: standalone)').matches,
+      protocol: window.location.protocol,
+      hostname: window.location.hostname,
+    });
+
     // Handle beforeinstallprompt event
     const handleBeforeInstallPrompt = (e: Event) => {
+      console.log('🎯 PWA beforeinstallprompt event fired!', e);
       e.preventDefault();
       setDeferredPrompt(e as BeforeInstallPromptEvent);
       setIsInstallable(true);
@@ -52,9 +74,17 @@ export const usePwaInstall = () => {
           'To install this app on iOS:\n\n1. Tap Share button\n2. Tap Add to Home Screen\n3. Tap Add'
         );
       } else {
-        alert(
-          'Install prompt not available yet.\n\nMake sure you are using HTTPS (or localhost), the app is not already installed, and then use your browser menu:\n- Chrome: Install app / Add to desktop\n- Edge: Apps > Install this site as an app\n- Firefox: Add to homescreen (mobile).'
-        );
+        // Check if service worker is registered
+        const registration = await navigator.serviceWorker.getRegistration();
+        const hasServiceWorker = !!registration;
+        
+        const message = `PWA installation not ready yet. Please ensure:\n\n${
+          hasServiceWorker ? '✅' : '❌'
+        } Service Worker registered\n${
+          window.location.protocol === 'https:' || window.location.hostname === 'localhost' ? '✅' : '❌'
+        } HTTPS or localhost\n\nTry refreshing the page and interacting with the app first, then click install again.\n\nAlternatively, use your browser menu:\n- Chrome: Menu (⋮) → Install Todify\n- Edge: Menu (⋯) → Apps → Install this site as an app\n- Firefox: Menu (☰) → Install This Site as an App`;
+        
+        alert(message);
       }
       console.warn('PWA install trigger is unavailable. Ensure user engagement criteria are met.');
       return;
@@ -83,5 +113,11 @@ export const usePwaInstall = () => {
     isInstalled,
     isIos,
     handleInstall,
+    debugInfo: {
+      hasDeferredPrompt: !!deferredPrompt,
+      serviceWorkerRegistered,
+      isHttps: window.location.protocol === 'https:' || window.location.hostname === 'localhost',
+      userAgent: navigator.userAgent,
+    },
   };
 };

@@ -16,7 +16,7 @@ createRoot(document.getElementById("root")!).render(
 );
 
 // Enhanced Service Worker registration with update handling
-if (import.meta.env.PROD && "serviceWorker" in navigator) {
+if ("serviceWorker" in navigator) {
   window.addEventListener("load", async () => {
     try {
       const registration = await navigator.serviceWorker.register("/sw.js?t=" + new Date().getTime(), {
@@ -36,30 +36,34 @@ if (import.meta.env.PROD && "serviceWorker" in navigator) {
               navigator.serviceWorker.controller
             ) {
               // New service worker available, show update notification
-              console.log("New service worker available, ready to update");
-              
-              // Optionally show a toast or notification to user
-              if ("serviceWorker" in navigator && registration.waiting) {
-                console.log("Update available");
-                // You can dispatch a custom event here for UI notification
-                window.dispatchEvent(
-                  new CustomEvent("sw-update-available", {
-                    detail: { registration },
-                  })
-                );
+              if (import.meta.env.PROD) {
+                console.log("New service worker available, ready to update");
+                
+                // Optionally show a toast or notification to user
+                if ("serviceWorker" in navigator && registration.waiting) {
+                  console.log("Update available");
+                  // You can dispatch a custom event here for UI notification
+                  window.dispatchEvent(
+                    new CustomEvent("sw-update-available", {
+                      detail: { registration },
+                    })
+                  );
+                }
               }
             }
           });
         }
       });
 
-      // Handle controller change (when new SW takes over)
-      let refreshing = false;
-      navigator.serviceWorker.addEventListener("controllerchange", () => {
-        if (refreshing) return;
-        refreshing = true;
-        window.location.reload();
-      });
+      // Handle controller change (when new SW takes over) - only in production
+      if (import.meta.env.PROD) {
+        let refreshing = false;
+        navigator.serviceWorker.addEventListener("controllerchange", () => {
+          if (refreshing) return;
+          refreshing = true;
+          window.location.reload();
+        });
+      }
     } catch (error) {
       console.error("Service Worker registration failed:", error);
     }
