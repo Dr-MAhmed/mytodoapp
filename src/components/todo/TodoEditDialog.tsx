@@ -89,7 +89,7 @@ export const TodoEditDialog: React.FC<TodoEditDialogProps> = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-[500px] p-0 overflow-hidden rounded-2xl gap-0">
+      <DialogContent className="w-[calc(100vw-2rem)] sm:max-w-[500px] p-0 overflow-hidden rounded-2xl gap-0">
         <DialogHeader className="px-6 py-6 border-b bg-muted/30">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-xl font-bold">Edit Task</DialogTitle>
@@ -100,7 +100,7 @@ export const TodoEditDialog: React.FC<TodoEditDialogProps> = ({
         </DialogHeader>
         
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="px-6 py-6 space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="px-4 sm:px-6 py-4 sm:py-6 space-y-4 sm:space-y-6">
             <FormField
               control={form.control}
               name="title"
@@ -115,7 +115,7 @@ export const TodoEditDialog: React.FC<TodoEditDialogProps> = ({
               )}
             />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <FormField
                 control={form.control}
                 name="priority"
@@ -197,14 +197,14 @@ export const TodoEditDialog: React.FC<TodoEditDialogProps> = ({
               )}
             />
 
-            <div className="flex items-center justify-between pt-4 border-t gap-3">
-              <Button type="button" variant="ghost" onClick={handleDelete} className="text-destructive hover:text-destructive hover:bg-destructive/10 rounded-full h-11 px-6">
+            <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between pt-4 border-t gap-2 sm:gap-3">
+              <Button type="button" variant="ghost" onClick={handleDelete} className="text-destructive hover:text-destructive hover:bg-destructive/10 rounded-full h-10 sm:h-11 px-4 sm:px-6">
                 <Trash2 className="mr-2 h-4 w-4" />
                 Delete Task
               </Button>
               <div className="flex gap-2">
-                <Button type="button" variant="outline" onClick={onClose} className="rounded-full h-11 px-6">Cancel</Button>
-                <Button type="submit" className="rounded-full h-11 px-6">
+                <Button type="button" variant="outline" onClick={onClose} className="flex-1 sm:flex-none rounded-full h-10 sm:h-11 px-4 sm:px-6">Cancel</Button>
+                <Button type="submit" className="flex-1 sm:flex-none rounded-full h-10 sm:h-11 px-4 sm:px-6">
                   <Save className="mr-2 h-4 w-4" />
                   Save Changes
                 </Button>

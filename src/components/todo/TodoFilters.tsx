@@ -27,24 +27,24 @@ export const TodoFilters: React.FC<TodoFiltersProps> = ({
   ];
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between gap-4 py-6 border-b border-t mb-2 bg-background/50 sticky top-0 z-10">
-      {/* Filter Tabs */}
-      <div className="flex items-center gap-1 p-1 bg-muted rounded-lg w-full md:w-auto overflow-x-auto no-scrollbar">
+    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 py-3 sm:py-5 border-b border-t mb-2 bg-background/80 backdrop-blur-sm">
+      {/* Filter Tabs — full-width pill on mobile */}
+      <div className="flex items-center gap-1 p-1 bg-muted rounded-lg w-full sm:w-auto">
         {filterTabs.map(tab => (
           <button
             key={tab.id}
             onClick={() => setFilter(tab.id)}
             className={cn(
-              "flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-md transition-all whitespace-nowrap",
-              filter === tab.id 
-                ? "bg-card text-foreground shadow-sm scale-100" 
-                : "text-muted-foreground hover:text-foreground hover:bg-card/30 scale-95"
+              "flex-1 flex items-center justify-center gap-1.5 px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-md transition-all whitespace-nowrap",
+              filter === tab.id
+                ? "bg-card text-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-card/30"
             )}
           >
             {tab.label}
-            <Badge 
-              variant={filter === tab.id ? "default" : "secondary"} 
-              className="ml-1 h-5 min-w-5 px-1 flex items-center justify-center rounded-full text-[10px]"
+            <Badge
+              variant={filter === tab.id ? "default" : "secondary"}
+              className="h-4 min-w-4 px-1 flex items-center justify-center rounded-full text-[10px]"
             >
               {tab.count}
             </Badge>
@@ -53,12 +53,12 @@ export const TodoFilters: React.FC<TodoFiltersProps> = ({
       </div>
 
       {/* Sort Selector */}
-      <div className="flex items-center gap-3 w-full md:w-auto shrink-0">
-        <label className="text-xs font-semibold text-muted-foreground uppercase tracking-widest flex items-center gap-1.5 whitespace-nowrap">
-          <ArrowUpDown className="h-3 w-3" /> Sort by
+      <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
+        <label className="text-xs font-semibold text-muted-foreground uppercase tracking-widest flex items-center gap-1 whitespace-nowrap">
+          <ArrowUpDown className="h-3 w-3" /> Sort
         </label>
         <Select value={sort} onValueChange={(val: TodoSort) => setSort(val)}>
-          <SelectTrigger className="w-full md:w-[160px] h-9 bg-card">
+          <SelectTrigger className="flex-1 sm:w-[150px] h-8 sm:h-9 bg-card text-xs sm:text-sm">
             <SelectValue placeholder="Sort by..." />
           </SelectTrigger>
           <SelectContent>

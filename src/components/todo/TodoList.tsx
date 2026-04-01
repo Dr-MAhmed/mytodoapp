@@ -24,8 +24,6 @@ interface TodoListProps {
   onDelete: (id: string) => void;
   onEdit: (todo: Todo) => void;
   onReorder: (activeId: string, overId: string) => void;
-  selectedIds?: string[];
-  onSelect?: (id: string) => void;
 }
 
 export const TodoList: React.FC<TodoListProps> = ({ 
@@ -34,8 +32,6 @@ export const TodoList: React.FC<TodoListProps> = ({
   onDelete, 
   onEdit, 
   onReorder,
-  selectedIds = [],
-  onSelect
 }) => {
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -82,8 +78,6 @@ export const TodoList: React.FC<TodoListProps> = ({
                   onToggle={onToggle}
                   onDelete={onDelete}
                   onEdit={onEdit}
-                  isSelected={selectedIds.includes(todo.id)}
-                  onSelect={onSelect}
                 />
               </motion.div>
             ))}

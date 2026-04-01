@@ -45,12 +45,12 @@ export const TodoInput: React.FC<TodoInputProps> = ({ onAdd }) => {
         onSubmit={handleSubmit}
         className="bg-card border rounded-xl shadow-sm overflow-hidden"
       >
-        <div className="flex items-center p-4 gap-3">
+        <div className="flex items-center p-3 sm:p-4 gap-2 sm:gap-3">
           <Input
             placeholder="Add a new task..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="flex-1 border-none focus-visible:ring-0 text-lg placeholder:text-muted-foreground"
+            className="flex-1 border-none focus-visible:ring-0 text-base sm:text-lg placeholder:text-muted-foreground"
             maxLength={200}
           />
           <div className="flex items-center gap-2">
@@ -82,7 +82,7 @@ export const TodoInput: React.FC<TodoInputProps> = ({ onAdd }) => {
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="p-4 border-t bg-muted/30 grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="p-3 sm:p-4 border-t bg-muted/30 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                 {/* Priority Selector */}
                 <div className="space-y-2">
                   <label className="text-xs font-medium text-muted-foreground flex items-center gap-1">
@@ -150,7 +150,7 @@ export const TodoInput: React.FC<TodoInputProps> = ({ onAdd }) => {
         <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-semibold">
           {title.length}/200 characters
         </p>
-        <p className="text-[10px] text-muted-foreground">Press Enter to add task</p>
+        <p className="hidden sm:block text-[10px] text-muted-foreground">Press Enter to add task</p>
       </div>
     </div>
   );
